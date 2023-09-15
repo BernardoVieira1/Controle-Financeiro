@@ -13,9 +13,9 @@ datasource db {
 model transactions {
     id Int @id @default(autoincrement())
 
-    title      String
+    title      String   @default("Sem titulo")
     value      Float
-    type       String
+    type       String   @default("ENTRADA")
     categoria  String
     dateCreate DateTime @default(now())
 }
