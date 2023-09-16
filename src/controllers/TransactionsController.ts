@@ -1,10 +1,18 @@
 import { Request, Response } from 'express';
 import { prisma } from '../database';
+import { JwtPayload } from 'jsonwebtoken';
+
+interface customRequest extends Request {
+    userId:string | JwtPayload;
+}
 
 export default{
-	async createTransaction(req: Request, res: Response){
+	async createTransaction(req: customRequest, res: Response){
 		try{
-			const {userId, title, value, type, categoria} = req.body;
+			const authUserId = req.userId;
+			const userId = String(authUserId);
+
+			const {title, value, type, categoria} = req.body;
 
 			if(!userId){
 				return res.status(400).json({message: 'Usuario não informado'});
@@ -109,6 +117,33 @@ export default{
 		}
 	},
 
+	async getMyTransactions(req: customRequest, res: Response){
+		try {
+			const authUserId = req.userId;
+			const userId = String(authUserId);
+
+			const transactions = await prisma.transactions.findMany({
+				where:{
+					userId: userId
+				}
+			});
+
+			if(transactions.length == 0){
+				return res.status(400).json({message: 'Você não tem operações'});
+
+			}
+
+			res.json({
+				err: false,
+				transactions
+
+			});
+
+		} catch (err) {
+			return res.json({ message: err.message });
+		}
+	},
+
 	async deleteTransaction(req: Request, res: Response){
 		try {
 
@@ -140,6 +175,7 @@ export default{
 			res.json({ message: err.message });
 		}
 	}
+
 
 
 

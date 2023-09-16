@@ -1,9 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-function checkAuth(req: Request, res: Response, next: NextFunction) {
+interface customRequest extends Request {
+    userId:string | JwtPayload;
+}
+
+function checkAuth(req: customRequest, res: Response, next: NextFunction) {
 	const authHeader = req.headers['authorization'];
 	const token = authHeader.split(' ')[1];
 
@@ -13,7 +18,9 @@ function checkAuth(req: Request, res: Response, next: NextFunction) {
 	try {
 
 		const secret = process.env.SECRET;
-		jwt.verify(token, secret);
+		const decoded = jwt.verify(token, secret) as JwtPayload;
+
+		req.userId = decoded.id;
 
 		next();
 

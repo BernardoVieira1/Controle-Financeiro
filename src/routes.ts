@@ -11,7 +11,11 @@ router.post('/createTransaction',checkAuth, TransactionsController.createTransac
 router.get('/getTransactions',checkAuth, TransactionsController.getTransactions);
 router.get('/searchTransactions',checkAuth, TransactionsController.searchTransactions);
 router.get('/getTransaction/:id',checkAuth, TransactionsController.getTransaction);
+router.get('/getMyTransactions',checkAuth, TransactionsController.getMyTransactions);
 router.delete('/deleteTransaction/:id',checkAuth, TransactionsController.deleteTransaction);
+
+
+
 
 //Rotas usuario
 router.get('/listUsers',checkAuth, UserController.listUsers);
