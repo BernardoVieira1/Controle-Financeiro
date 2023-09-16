@@ -4,7 +4,11 @@ import { prisma } from '../database';
 export default{
 	async createTransaction(req: Request, res: Response){
 		try{
-			const {title, value, type, categoria} = req.body;
+			const {userId, title, value, type, categoria} = req.body;
+
+			if(!userId){
+				return res.status(400).json({message: 'Usuario não informado'});
+			}
 
 			if(!title){
 				return res.status(400).json({message: 'Titulo não informado'});
@@ -24,6 +28,7 @@ export default{
 
 			const transaction = await prisma.transactions.create({
 				data:{
+					userId,
 					title,
 					value,
 					type,
@@ -84,7 +89,7 @@ export default{
 		try {
 			const transaction = await prisma.transactions.findMany({
 				where:{
-					id: Number(req.params.id)
+					id: req.params.id
 				}
 			});
 
@@ -109,7 +114,7 @@ export default{
 
 			const transactionExists = await prisma.transactions.findMany({
 				where:{
-					id: Number(req.params.id)
+					id: req.params.id
 				}
 			});
 
@@ -120,7 +125,7 @@ export default{
 
 			const DeletTransaction = await prisma.transactions.delete({
 				where:{
-					id: Number(req.params.id)
+					id: req.params.id
 				}
 
 			});
