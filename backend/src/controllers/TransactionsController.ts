@@ -7,6 +7,7 @@ interface customRequest extends Request {
 }
 
 export default{
+
 	async createTransaction(req: customRequest, res: Response){
 		try{
 			const authUserId = req.userId;
@@ -175,8 +176,5 @@ export default{
 			res.json({ message: err.message });
 		}
 	}
-
-
-
 
 };

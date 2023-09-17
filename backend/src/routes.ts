@@ -3,6 +3,7 @@ import TransactionsController from './controllers/TransactionsController';
 import UserController from './controllers/UserController';
 import checkAuth from './middlewares/auth';
 import authcontroller from './controllers/authcontroller';
+import valuesController from './controllers/valuesController';
 const router = Router();
 
 //Rotas de operações
@@ -14,7 +15,8 @@ router.get('/getTransaction/:id',checkAuth, TransactionsController.getTransactio
 router.get('/getMyTransactions',checkAuth, TransactionsController.getMyTransactions);
 router.delete('/deleteTransaction/:id',checkAuth, TransactionsController.deleteTransaction);
 
-
+//Rotas de prços
+router.get('/getValues',checkAuth, valuesController.getValuesTransactions);
 
 
 //Rotas usuario
