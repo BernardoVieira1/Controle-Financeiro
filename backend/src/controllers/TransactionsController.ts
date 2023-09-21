@@ -130,7 +130,7 @@ export default{
 			});
 
 			if(transactions.length == 0){
-				return res.status(400).json({message: 'Você não tem operações'});
+				return res.status(200).json({message: 'Você não tem operações'});
 
 			}
 

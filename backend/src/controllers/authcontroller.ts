@@ -30,7 +30,7 @@ export default{
 			const checkPassword = await bcrypt.compare(password, user[0].password);
 
 			if(!checkPassword){
-				return res.status(201).json({
+				return res.status(400).json({
 					message: 'Senha incorreta',
 					checkPassword
 				});
