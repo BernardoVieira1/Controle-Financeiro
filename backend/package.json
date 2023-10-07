@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "build": "ts-node-dev src/server.ts",
-    "start": "node public/dist/server.js"
+    "build": "prisma generate && tsc",
+    "start": "node public/dist/server.js",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
