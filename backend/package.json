@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/server.ts"
+    "dev": "ts-node-dev src/server.ts",
+    "build": "ts-node-dev src/server.ts",
+    "start": "node public/dist/server.js"
   },
   "keywords": [],
   "author": "",
