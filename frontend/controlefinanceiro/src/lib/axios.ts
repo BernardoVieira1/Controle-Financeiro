@@ -5,7 +5,7 @@ import { parseCookies } from "nookies"
 const { "Controle-token": token } = parseCookies()
 
 export const api = axios.create({
-    baseURL: "http://localhost:8080/"
+    baseURL: "https://controle-financeiro-rose.vercel.app/"
 })
 
 if(token){
