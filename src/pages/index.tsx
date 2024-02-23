@@ -146,7 +146,7 @@ export default function Home() {
           <table className='w-full border-spacing-y-2 border-separate'>
             <tbody >
               {transactions ?
-                transactions.map((item, index) =>(
+                transactions.map ((item, index) =>(
                   <tr key={index} className='bg-blue-color-100'>
                   <td className='px-8 py-4 rounded-s'>{item.title}</td>
                   <td className={`px-8 py-4 font-bold ${item.type == "ENTRADA"? "text-green-color":"text-red-color"} `}>R${item.value}</td>

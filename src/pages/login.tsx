@@ -22,8 +22,6 @@ export default function Login() {
     signIn(data)
   }
 
-  
-
   return (
     
    <div className='flex flex-row h-full w-full bg-secondary-color'>
